@@ -67,7 +67,7 @@
 //
 
 `include "i2c_master_defines.v"
-`default_nettype wire   //do not allow undeclared wires
+`default_nettype none   //do not allow undeclared wires
 
 module i2c_master_byte_ctrl
   (
@@ -81,39 +81,37 @@ module i2c_master_byte_ctrl
 	//
 	// inputs & outputs
 	//
-	input clk;     // master clock
-    input [6:0] my_addr; // Slave address input
-	input rst;     // synchronous active high reset
-	input nReset;  // asynchronous active low reset
-	input ena;     // core enable signal
-    input sl_cont;
-	input [15:0] clk_cnt; // 4x SCL
+	input wire clk;     // master clock
+    input wire [6:0] my_addr; // Slave address input
+	input wire rst;     // synchronous active high reset
+	input wire nReset;  // asynchronous active low reset
+	input wire ena;     // core enable signal
+    input wire sl_cont;
+	input wire [15:0] clk_cnt; // 4x SCL
 
 	// control inputs
-	input       start;
-	input       stop;
-	input       read;
-	input       write;
-	input       ack_in;
-	input [7:0] din;
+	input wire  start;
+	input wire  stop;
+	input wire  read;
+	input wire  write;
+	input wire  ack_in;
+	input wire [7:0] din;
 
 	// status outputs
-	output       cmd_ack;
-	reg cmd_ack;
-	output       ack_out;
-	reg ack_out;
-	output       i2c_busy;
-	output       i2c_al;
-	output [7:0] dout;
+	output reg  cmd_ack;
+	output reg  ack_out;
+	output wire  i2c_busy;
+	output wire  i2c_al;
+	output wire [7:0] dout;
 
 	// I2C signals
-	input  scl_i;
-	output scl_o;
-	output scl_oen;
-	input  sda_i;
-	output sda_o;
-	output sda_oen;
-    input 	slave_en;
+	input  wire scl_i;
+	output wire scl_o;
+	output wire scl_oen;
+	input  wire sda_i;
+	output wire sda_o;
+	output wire sda_oen;
+    input  wire slave_en;
     output reg 	slave_dat_req;
     output reg 	slave_dat_avail;
     output reg 	slave_act;
@@ -138,11 +136,9 @@ module i2c_master_byte_ctrl
 
 	reg        sl_wait;
 	// signals for bit_controller
-	wire [6:0] my_addr;
 	reg  [3:0] core_cmd;
 	reg        core_txd;
 	wire       core_ack, core_rxd;
-	wire   	   sl_cont;
 
 	// signals for shift register
 	reg [7:0] sr; //8bit shift register

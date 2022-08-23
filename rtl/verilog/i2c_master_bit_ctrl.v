@@ -135,38 +135,38 @@
 //
 
 `include "i2c_master_defines.v"
-`default_nettype wire   //do not allow undeclared wires
+`default_nettype none   //do not allow undeclared wires
 
 module i2c_master_bit_ctrl (
-    input             clk,      // system clock
-    input             rst,      // synchronous active high reset
-    input             nReset,   // asynchronous active low reset
-    input             ena,      // core enable signal
+    input  wire       clk,      // system clock
+    input  wire       rst,      // synchronous active high reset
+    input  wire      nReset,   // asynchronous active low reset
+    input  wire      ena,      // core enable signal
 
-    input      [15:0] clk_cnt,  // clock prescale value
+    input  wire [15:0] clk_cnt,  // clock prescale value
 
-    input      [ 3:0] cmd,      // command (from byte controller)
+    input  wire [ 3:0] cmd,      // command (from byte controller)
     output reg        cmd_ack,  // command complete acknowledge
     output reg        busy,     // i2c bus busy
     output reg        al,       // i2c bus arbitration lost
 
-    input             din,
+    input  wire       din,
     output reg        dout,
 
-    input             scl_i,    // i2c clock line input
-    output            scl_o,    // i2c clock line output
-    output            scl_oen,  // i2c clock line output enable (active low)
-    input             sda_i,    // i2c data line input
-    output            sda_o,    // i2c data line output
-    output            sda_oen,  // i2c data line output enable (active low)
+    input  wire       scl_i,    // i2c clock line input
+    output wire       scl_o,    // i2c clock line output
+    output wire       scl_oen,  // i2c clock line output enable (active low)
+    input  wire       sda_i,    // i2c data line input
+    output wire       sda_o,    // i2c data line output
+    output wire       sda_oen,  // i2c data line output enable (active low)
 
     output reg        slave_adr_received,
     output reg [7:0]  slave_adr,
-    input             master_mode,
+    input  wire       master_mode,
     output reg        cmd_slave_ack,
-    input [1:0]       slave_cmd ,
-    input             sl_wait,
-    output            slave_reset
+    input  wire [1:0] slave_cmd ,
+    input  wire       sl_wait,
+    output wire       slave_reset
 
 );
 
